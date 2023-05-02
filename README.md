@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/c7365e06-9113-48d9-ab31-7b3ba03c52db/deploy-status)](https://app.netlify.com/sites/crwn-clothing-pro/deploys)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
