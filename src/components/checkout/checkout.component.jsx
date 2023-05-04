@@ -1,12 +1,13 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { CartContext } from '../../contexts/cart.context';
-import { UserContext } from '../../contexts/user.context';
 import CheckoutItem from '../checkout-item/checkout-item.component';
 import './checkout.styles.scss';
 
 const Checkout = () => {
     const { cartItems, setIsCartOpen, cartTotal } = useContext(CartContext);
-    setIsCartOpen(false);
+
+    useEffect(() => setIsCartOpen(false), []);
+
     return (
         <div className='checkout-container'>
             <div className='checkout-header'>
