@@ -1,9 +1,8 @@
 import { useContext, useState } from "react";
-import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth} from '../../utils/firebase/firebase.util'
+import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from '../../utils/firebase/firebase.util'
 import './sign-up-form.styles.scss';
 import FormInput from '../form-input/form-input.component';
 import Button from "../button/button.component";
-import { UserContext } from "../../contexts/user.context";
 
 const defaultFormFields = {
     displayName: '',
@@ -12,35 +11,35 @@ const defaultFormFields = {
     confirmPassword: ''
 };
 
-const SignUpForm = ()=> {
+const SignUpForm = () => {
 
     const [formFields, setFormFields] = useState(defaultFormFields);
-    const {displayName,email,password,confirmPassword} = formFields;
-    
-    const handleChange = (event) =>{
-       const {name,value} = event.target;
-        setFormFields({ ...formFields,[name]:value});
+    const { displayName, email, password, confirmPassword } = formFields;
+
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setFormFields({ ...formFields, [name]: value });
     };
 
-    const handleSubmit = async (event)=> {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        if(formFields.password != formFields.confirmPassword){
+        if (formFields.password != formFields.confirmPassword) {
             alert("password do not match");
             return;
         }
 
         try {
-            const {user} = await  createAuthUserWithEmailAndPassword(formFields.email,formFields.password);            
-            await createUserDocumentFromAuth(user, { displayName });            
+            const { user } = await createAuthUserWithEmailAndPassword(formFields.email, formFields.password);
+            await createUserDocumentFromAuth(user, { displayName });
             setFormFields(defaultFormFields);
         } catch (e) {
-            if(e.code == 'auth/email-already-in-use'){
+            if (e.code == 'auth/email-already-in-use') {
                 alert('Email already in use!');
-            }           
+            }
         }
     };
 
-    return(
+    return (
         <div className="sign-up-container">
             <h2>Dont have an account?</h2>
             <span>Sign up with your email and password</span>
@@ -48,7 +47,7 @@ const SignUpForm = ()=> {
                 <FormInput label="Display Name" type="text" required name="displayName" onChange={handleChange} value={displayName} />
                 <FormInput label="Email" type="email" required name="email" onChange={handleChange} value={email} />
                 <FormInput label="password" type="password" required name="password" onChange={handleChange} value={password} />
-                <FormInput label="Confirm Passord" type="password" required name="confirmPassword" onChange={handleChange} value={confirmPassword}/>
+                <FormInput label="Confirm Passord" type="password" required name="confirmPassword" onChange={handleChange} value={confirmPassword} />
                 <Button buttonTypetype="submit">Sign Up</Button>
             </form>
         </div>
