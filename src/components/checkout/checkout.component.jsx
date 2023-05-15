@@ -10,7 +10,9 @@ const Checkout = () => {
     const cartItems = useSelector(selectCartItems);
     const cartTotal = useSelector(selectCartTotal);
 
-    useEffect(() => dispatch(setIsCartOpen(false)), []);
+    useEffect(() => {
+        dispatch(setIsCartOpen(false))
+    }, []);
 
     return (
         <div className='checkout-container'>
